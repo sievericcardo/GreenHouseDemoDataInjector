@@ -4,7 +4,7 @@ from influxdb_client import Bucket, InfluxDBClient, Point
 from influxdb_client.client.exceptions import InfluxDBError
 from influxdb_client.client.write_api import SYNCHRONOUS
 
-from config import CONFIG_PATH
+from injector.config import CONFIG_PATH
 
 
 class InfluxController:

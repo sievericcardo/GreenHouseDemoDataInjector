@@ -6,7 +6,7 @@ from datetime import datetime
 from typing import List
 
 import numpy as np
-from assets.measurement_type import MeasurementType
+from injector.assets.measurement_type import MeasurementType
 from influxdb_client import Point
 
 start_time = datetime.now() - timedelta(days=30)

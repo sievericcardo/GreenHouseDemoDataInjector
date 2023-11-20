@@ -12,8 +12,8 @@ from pathlib import Path
 path.append(str(Path(__file__).resolve().parent.parent))  # add parent directory to system path
 
 
-from influx.influx_controller import InfluxController
-from test.random_measurements import (
+from injector.influx.influx_controller import InfluxController
+from injector.test.random_measurements import (
     GREENHOUSE_MEASUREMENTS,
     PLANT_MEASUREMENTS,
     POT_MEASUREMENTS,
