@@ -23,6 +23,7 @@ temp_data = np.linspace(20, 30, 100)
 humidity_data = np.linspace(0, 100, 100)
 pumpd_water_data = np.linspace(0, 100, 100)
 # For moist data we want to start from 90, then go down to 50, then go up to 90 again using a linear function of -10/3x + 90 (x is the time that passes) with noise that will not make it perfectly linear
+# The function is given by empirical observation of the data
 moist_data = np.concatenate(
     (
         np.linspace(90, 50, 50),
