@@ -9,12 +9,7 @@ import numpy as np
 from assets.measurement_type import MeasurementType
 from influxdb_client import Point
 
-# start_time = datetime(2023, 4, 11, 12, 0, 0)
-# end_time = datetime(2023, 4, 11, 13, 0, 0)
-
-# set start_time as 1 month ago
 start_time = datetime.now() - timedelta(days=30)
-# set end_time as now
 end_time = datetime.now()
 
 time_data = np.linspace(start_time.timestamp(), end_time.timestamp(), 100)
