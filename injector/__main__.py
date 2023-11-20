@@ -1,5 +1,9 @@
 from sys import argv, path
 from typing import Optional
+import os
+from threading import Thread
+import socket # for hostname retrieval
+import re # to split the hostname in letters and numbers
 
 from influxdb_client import Bucket
 
@@ -16,9 +20,59 @@ from test.random_measurements import (
     PUMP_MEASUREMENTS,
     SHELF_MEASUREMENTS,
 )
+from queue import Subscriber
+
+def __init__(self):
+    self.moisture = 90
+
+
+def __load_env_file(env_file_path=".env"):
+    try:
+        with open(env_file_path, "r") as file:
+            for line in file:
+                # Ignore lines that are empty or start with '#'
+                if not line.strip() or line.startswith("#"):
+                    continue
+
+                # Split the line at the first '=' character
+                key, value = line.strip().split("=", 1)
+
+                # Set the environment variable
+                os.environ[key] = value
+
+    except FileNotFoundError:
+        print(f"{env_file_path} not found. Make sure to create a .env file with your environment variables.")
+
+
+def __wait_message():
+    """
+    Wait for a message from the broker
+    """
+    __load_env_file()
+    url = os.getenv("URL")
+    username = os.getenv("USER")
+    password = os.getenv("PASS")
+
+    # Get hostname for the queue
+    hostname = socket.gethostname()
+    r = re.compile("([a-zA-Z]+)([0-9]+)")
+    m = r.match(hostname)
+    # Match the tuple <T.i.A>
+    queue_destination = "actuator.1.water"
+
+    conn = stomp.Connection(host_and_ports=[(url, 61613)])
+    conn.set_listener('', Subscriber(conn, conf, CONFIG_PATH))
+    conn.connect(username, password, wait=True)
+    conn.subscribe(destination=queue_destination, id=1, ack='auto')
+
+    while 1:
+        sleep(10)
 
 
 def main(bucket_name: str, num_measurements: Optional[int] = 5):
+    thread = Thread(target=__wait_message)
+    thread.start()
+
     influx_controller = InfluxController()
     # if bucket does not exist create it
     bucket: Bucket = influx_controller.get_bucket(
@@ -59,4 +113,3 @@ if __name__ == "__main__":
         )
         exit(1)
 
-    exit()
