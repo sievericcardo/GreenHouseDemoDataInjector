@@ -1,0 +1,15 @@
+python-decouple
+influxdb-client==1.36.1
+pytz==2022.1
+adafruit-blinka
+opencv-python
+spidev
+adafruit-circuitpython-dht
+numpy==1.23.5
+configparser
+picamera2==0.3.9
+RPi.GPIO
+pre-commit
+stomp.py
+
+
