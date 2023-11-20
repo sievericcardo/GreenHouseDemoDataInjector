@@ -16,7 +16,7 @@ time_data = np.linspace(start_time.timestamp(), end_time.timestamp(), 100)
 light_data = np.linspace(0, 1, 100)
 temp_data = np.linspace(20, 30, 100)
 humidity_data = np.linspace(0, 100, 100)
-pumpd_water_data = np.linspace(0, 100, 100)
+pumped_water_data = np.linspace(0, 100, 100)
 # For moist data we want to start from 90, then go down to 50, then go up to 90 again using a linear function of -10/3x + 90 (x is the time that passes) with noise that will not make it perfectly linear
 # The function is given by empirical observation of the data
 moist_data = np.concatenate(
@@ -58,7 +58,7 @@ PUMP_MEASUREMENTS: List[Point] = [
     .field("pumped_water", water)
     .time(datetime.fromtimestamp(ts))
     for shelf, group, water, ts in zip(
-        ones_and_twos, left_and_right, pumpd_water_data, time_data
+        ones_and_twos, left_and_right, pumped_water_data, time_data
     )
 ]
 
